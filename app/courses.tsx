@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { saveVersion } from "@/app/lib/actions";
 import Link from "next/link";
+import Links from "./links";
 
 export default function Courses({ json, readOnly }: { json: [string, string][], readOnly: boolean }) {
   const [state, setState] = useState(json);
@@ -45,11 +46,9 @@ export default function Courses({ json, readOnly }: { json: [string, string][], 
 
   return (
     <main style={{ width: '100vw', overflow: 'scroll' }}>
-      <div className="flex gap-2 p-2 items-start" style={{ width: 'max-content' }}>
+      <div className="flex gap-2 p-2 items-start pr-[80vw]" style={{ width: 'max-content' }}>
         <div className="w-2xs">
-          <section>
-            <Link href="/versions">Version History ↗️</Link>
-          </section>
+          <Links />
         </div>
         {state.map((course, index) => {
           const [title, content] = course;
@@ -57,8 +56,8 @@ export default function Courses({ json, readOnly }: { json: [string, string][], 
             <section key={index} className="flex flex-col gap-2">
               <div className="flex gap-2">
                 <input className="px-2 grow w-2xs" value={title} onChange={e => onContentChange(index, 0, e.target.value)} readOnly={readOnly}/>
-                <button disabled={readOnly} onClick={() => onInsertAfter(index)}>➕</button>
                 <button disabled={readOnly} onClick={() => onDelete(index)}>🗑️</button>
+                <button disabled={readOnly} onClick={() => onInsertAfter(index)}>➕</button>
               </div>
               <textarea className="p-2" value={content} onChange={e => onContentChange(index, 1, e.target.value)} readOnly={readOnly}/>
             </section>
