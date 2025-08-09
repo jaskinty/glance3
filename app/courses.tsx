@@ -35,7 +35,7 @@ export default function Courses({ json }: { json: [string, string][] }) {
           <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>
             <input value={title} onChange={e => onContentChange(index, 0, e.target.value)}/>
             <textarea value={content} onChange={e => onContentChange(index, 1, e.target.value)}/>
-            <button onClick={() => onInsertAfter(index)}>insert after</button>
+            <button onClick={() => onInsertAfter(index)}>+ insert after</button>
             <button onClick={() => onDelete(index)}>delete</button>
           </div>
         );
