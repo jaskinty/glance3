@@ -10,8 +10,8 @@ export default async function Version({ params }: { params: Promise<{ id: string
         const [title, content] = course;
         return (
           <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>
-            <input defaultValue={title} contentEditable={false} />
-            <textarea defaultValue={content} contentEditable={false} />
+            <input defaultValue={title} readOnly />
+            <textarea defaultValue={content} readOnly />
           </div>
         );
       })}
