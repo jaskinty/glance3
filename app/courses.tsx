@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { saveVersion } from "@/app/lib/actions";
 import Link from "next/link";
 
-export default function Courses({ json }: { json: [string, string][] }) {
+export default function Courses({ json, readOnly }: { json: [string, string][], readOnly: boolean }) {
   const [state, setState] = useState(json);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUnsaved, setIsUnsaved] = useState(false);
 
   function onContentChange(i: number, j: number, content: string) {
+    setIsUnsaved(true);
     setState(state.map((course, index) => {
       if (i !== index) return course;
       return j === 0 ? [content, course[1]] : [course[0], content];
@@ -16,16 +18,21 @@ export default function Courses({ json }: { json: [string, string][] }) {
   }
 
   function onInsertAfter(index: number) {
+    setIsUnsaved(true);
     setState([...state.slice(0, index + 1), ['Course', 'Aa'], ...state.slice(index + 1)]);
   }
 
   function onDelete(index: number) {
+    setIsUnsaved(true);
     setState(state.filter((_, i) => i !== index));
   }
 
   function onSave() {
     setIsSaving(true);
-    saveVersion(state).finally(() => setIsSaving(false));
+    saveVersion(state).finally(() => {
+      setIsSaving(false);
+      setIsUnsaved(false);
+    });
   }
 
   useEffect(() => {
@@ -38,7 +45,7 @@ export default function Courses({ json }: { json: [string, string][] }) {
 
   return (
     <main style={{ width: '100vw', overflow: 'scroll' }}>
-      <div className="flex gap-2 p-2" style={{ width: 'max-content' }}>
+      <div className="flex gap-2 p-2 items-start" style={{ width: 'max-content' }}>
         <div className="w-2xs">
           <section>
             <Link href="/versions">Version History ↗️</Link>
@@ -49,17 +56,26 @@ export default function Courses({ json }: { json: [string, string][] }) {
           return (
             <section key={index} className="flex flex-col gap-2">
               <div className="flex gap-2">
-                <input className="px-2 grow w-2xs" value={title} onChange={e => onContentChange(index, 0, e.target.value)}/>
-                <button onClick={() => onInsertAfter(index)}>➕</button>
-                <button onClick={() => onDelete(index)}>🗑️</button>
+                <input className="px-2 grow w-2xs" value={title} onChange={e => onContentChange(index, 0, e.target.value)} readOnly={readOnly}/>
+                <button disabled={readOnly} onClick={() => onInsertAfter(index)}>➕</button>
+                <button disabled={readOnly} onClick={() => onDelete(index)}>🗑️</button>
               </div>
-              <textarea className="p-2" value={content} onChange={e => onContentChange(index, 1, e.target.value)}/>
+              <textarea className="p-2" value={content} onChange={e => onContentChange(index, 1, e.target.value)} readOnly={readOnly}/>
             </section>
           );
         })}
-        <button onClick={onSave} disabled={isSaving}>
+        {isUnsaved && <button onClick={onSave} disabled={isSaving} style={{
+          position: 'absolute',
+          bottom: 20,
+          right: 20,
+          borderRadius: 5,
+          padding: 10,
+          background: '#04a',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+        }}>
           {isSaving ? 'Saving...' : 'Save changes'}
-        </button>
+        </button>}
       </div>
     </main>
   );
