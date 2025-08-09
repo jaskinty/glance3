@@ -6,9 +6,6 @@ export default async function Home() {
   const json = await fetchLatestVersion();
 
   return (
-    <main style={{display: 'flex', gap: 10 }}>
-      <Link href="/versions">Version History</Link>
-      <Courses json={json}/>
-    </main>
+    <Courses json={json}/>
   );
 }
