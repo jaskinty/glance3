@@ -25,7 +25,7 @@ export async function fetchAllVersions() {
   const { data } = await supabase
     .from('versions')
     .select('id, created_at')
-    .order('created_at', { ascending: true })
+    .order('created_at', { ascending: false })
 
   return data!;
 }

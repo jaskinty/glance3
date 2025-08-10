@@ -64,7 +64,7 @@ export default function Courses({ json, readOnly }: { json: [string, string][], 
           );
         })}
         {isUnsaved && <button onClick={onSave} disabled={isSaving} style={{
-          position: 'absolute',
+          position: 'fixed',
           bottom: 20,
           right: 20,
           borderRadius: 5,

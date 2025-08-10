@@ -5,12 +5,26 @@ export default async function App() {
   const versions = await fetchAllVersions();
 
   return (
-    <div>
-      {versions.map(({ id, created_at }) => (
-        <div key={id} >
-          <Link href={`/versions/${id}`}>{created_at}</Link>
-        </div>
-        ) )}
+    <div className="p-4">
+      <h1 className="font-bold py-4">Version History</h1>
+      <div className="flex flex-col gap-2 items-start">
+        {versions.map(({ id, created_at }) => {
+          const date = new Date(created_at);
+          const formattedTime = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }).format(date);
+
+          return (
+            <section key={id}>
+              <Link href={`/versions/${id}`}>{formattedTime}</Link>
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }
