@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Links() {
   return (
-    <div className="flex flex-col gap-2">
+    <span className="flex flex-col gap-3">
       {[
         { txt: "🔑 Keys ↗️", href: "" },
         { txt: "💭 Potential Keys ↗️", href: "" },
@@ -15,10 +15,10 @@ export default function Links() {
         { txt: "📜 Version History ↗️", href: "/versions" },
         { txt: "ℹ️ About this tool ↗️", href: "" },
       ].map(({txt, href}, index) => (
-        <section key={index}>
+        <div key={index}>
           <Link href={href}>{txt}</Link>
-        </section>
+        </div>
       ))}
-    </div>
+    </span>
   );
 }

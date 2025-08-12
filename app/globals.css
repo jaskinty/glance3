@@ -1,28 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #eee;
+  --foreground: #000;
+  --surface: #fff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000;
+    --foreground: #fff;
+    --surface: #222;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui;
+}
+
+* {
+  scrollbar-color: #0000 #0000 !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+*::-webkit-scrollbar {
+  display: none !important;
 }
 
 input {
@@ -31,10 +40,56 @@ input {
 
 textarea {
   resize: none;
+  padding: 10px;
+}
+
+main {
+  width: 100vw;
+  display: flex;
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+  align-items: start;
 }
 
 section {
-  background: #7772;
+  flex-shrink: 0;
+  width: 400px;
   padding: 10px;
-  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 80vh;
+  padding: 10px;
+}
+
+section:first-child {
+  width: 300px;
+}
+
+section > div {
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section > span > div {
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section:last-child {
+  margin-right: 80vw;
+}
+
+@media (max-width: 800px) {
+  section {
+    width: 100vw;
+    scroll-snap-align: start;
+    padding: 20px;
+  }
 }
