@@ -82,6 +82,13 @@ section > span > div {
   gap: 8px;
 }
 
+.version {
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--surface);
+  width: 300px;
+}
+
 section:last-child {
   margin-right: 80vw;
 }

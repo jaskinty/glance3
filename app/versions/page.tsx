@@ -17,11 +17,10 @@ export default async function App() {
             minute: "numeric",
             hour12: true,
           }).format(date);
-
           return (
-            <section key={id}>
+            <div key={id} className="version">
               <Link href={`/versions/${id}`}>{formattedTime}</Link>
-            </section>
+            </div>
           );
         })}
       </div>
