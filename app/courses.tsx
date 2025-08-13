@@ -54,7 +54,7 @@ export default function Courses({ json, readOnly }: { json: [string, string][], 
               <div>
                 <div className="flex gap-2">
                   <input className="px-2 grow w-2xs" value={title} onChange={e => onContentChange(index, 0, e.target.value)} readOnly={readOnly}/>
-                  <button disabled={readOnly} onClick={() => onDelete(index)}>🗑️</button>
+                  <button disabled={readOnly || state.length === 1} onClick={() => onDelete(index)}>🗑️</button>
                   <button disabled={readOnly} onClick={() => onInsertAfter(index)}>➕</button>
                 </div>
                 <textarea value={content} onChange={e => onContentChange(index, 1, e.target.value)} readOnly={readOnly}></textarea>
@@ -67,48 +67,13 @@ export default function Courses({ json, readOnly }: { json: [string, string][], 
           bottom: 40,
           right: 40,
           borderRadius: 5,
-          padding: 10,
-          background: '#04a',
+          padding: '8px 16px 8px 16px',
+          background: '#08f',
           fontWeight: 'bold',
           cursor: 'pointer',
         }}>
           {isSaving ? 'Saving...' : 'Save changes'}
         </button>}
-    </main>
-  );
-
-  return (
-    <main style={{ width: '100vw', overflow: 'scroll' }}>
-      <div className="flex gap-2 p-2 items-start pr-[80vw]" style={{ width: 'max-content' }}>
-        <div className="w-2xs">
-          <Links />
-        </div>
-        {state.map((course, index) => {
-          const [title, content] = course;
-          return (
-            <section key={index} className="flex flex-col gap-2">
-              <div className="flex gap-2">
-                <input className="px-2 grow w-2xs" value={title} onChange={e => onContentChange(index, 0, e.target.value)} readOnly={readOnly}/>
-                <button disabled={readOnly} onClick={() => onDelete(index)}>🗑️</button>
-                <button disabled={readOnly} onClick={() => onInsertAfter(index)}>➕</button>
-              </div>
-              <textarea className="p-2" value={content} onChange={e => onContentChange(index, 1, e.target.value)} readOnly={readOnly}/>
-            </section>
-          );
-        })}
-        {isUnsaved && <button onClick={onSave} disabled={isSaving} style={{
-          position: 'fixed',
-          bottom: 20,
-          right: 20,
-          borderRadius: 5,
-          padding: 10,
-          background: '#04a',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-        }}>
-          {isSaving ? 'Saving...' : 'Save changes'}
-        </button>}
-      </div>
     </main>
   );
 }
