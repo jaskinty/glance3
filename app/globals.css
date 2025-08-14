@@ -103,6 +103,7 @@ section:last-child {
 
 button {
   color: #fff;
+  cursor: pointer;
 }
 
 button:disabled {

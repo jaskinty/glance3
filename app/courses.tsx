@@ -70,7 +70,6 @@ export default function Courses({ json, readOnly }: { json: [string, string][], 
           padding: '8px 16px 8px 16px',
           background: '#08f',
           fontWeight: 'bold',
-          cursor: 'pointer',
         }}>
           {isSaving ? 'Saving...' : 'Save changes'}
         </button>}
