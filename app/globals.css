@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #eee;
-  --foreground: #000;
+  --background: #eeeef0;
+  --foreground: #334;
   --surface: #fff;
 }
 
@@ -13,8 +13,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000;
-    --foreground: #fff;
+    --background: #111;
+    --foreground: #ccc;
     --surface: #222;
   }
 }
@@ -40,7 +40,8 @@ input {
 
 textarea {
   resize: none;
-  padding: 10px;
+  padding: 5px;
+  outline: none;
 }
 
 main {
@@ -53,11 +54,10 @@ main {
 
 section {
   flex-shrink: 0;
-  width: 400px;
-  padding: 10px;
+  width: 390px;
   box-sizing: border-box;
   margin-bottom: 80vh;
-  padding: 10px;
+  padding: 5px;
 }
 
 section:first-child {
@@ -66,11 +66,11 @@ section:first-child {
 
 section > div {
   border-radius: 8px;
-  padding: 10px;
+  padding: 5px;
   background: var(--surface);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
 }
 
 section > span > div {
@@ -79,7 +79,6 @@ section > span > div {
   background: var(--surface);
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 .version {

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Links() {
   return (
-    <span className="flex flex-col gap-3">
+    <span className="flex flex-col gap-2">
       {[
         { txt: "🔑 Keys ↗️", href: "" },
         { txt: "🏂 Identity Board ↗️", href: "" },
