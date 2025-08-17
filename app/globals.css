@@ -61,7 +61,7 @@ section {
 }
 
 section:first-child {
-  width: 300px;
+  width: max-content;
 }
 
 section > div {
